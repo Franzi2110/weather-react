@@ -34,7 +34,14 @@ export default function SearchForm() {
       />
     );
   }
-
+  function showFahrenheit(event) {
+    event.preventDefault();
+    return Math.round({ temperature } * 9) / 5 + 32;
+  }
+  function showCelsius(event) {
+    event.preventDefault();
+    return { temperature };
+  }
   if (loaded) {
     return (
       <div>
@@ -48,7 +55,36 @@ export default function SearchForm() {
           />
           <input type="submit" value="Search" />
         </form>
-        <div>{temperature}</div>
+        <div className="row">
+          <div className="col-4">
+            <p id="cityName">{city}</p>
+          </div>
+          <div class="row justify-content-left">
+            <div class="col-4">
+              <span id="actualDegree">️️{temperature}</span>&nbsp;
+              <sup>
+                <span>
+                  <a href="/" onClick={showCelsius} id="celsius" class="active">
+                    °C
+                  </a>{" "}
+                  |
+                  <a href="/" onClick={showFahrenheit} id="fahrenheit">
+                    °F
+                  </a>
+                </span>
+              </sup>
+              <p id="current-date"></p>
+              <div>{icon}</div>
+            </div>
+            <div className="col-5" id="moreInformation">
+              <ul>
+                <li id="description">{description}</li>
+                <li id="current-humidity">Humidity: {humidity}%</li>
+                <li id="wind">Wind speed: {wind} km/h</li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
     );
   } else {
