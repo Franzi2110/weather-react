@@ -183,7 +183,7 @@ export default function SearchForm() {
                 </a>
               </span>
             </sup>
-            <div>{icon}</div>
+            <div className="icon">☀️</div>
             <p id="current-date">Last updated: Mon, 8:34 am</p>
           </div>
           <div className="col-5" id="moreInformation">

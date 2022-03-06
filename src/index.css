@@ -38,6 +38,9 @@ footer {
 #current-date {
   font-size: 12px;
 }
+.icon {
+  font-size: 40px;
+}
 .WeatherApp {
   margin: 30px auto;
   padding: 20px;
