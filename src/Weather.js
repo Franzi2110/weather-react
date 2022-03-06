@@ -8,12 +8,7 @@ export default function Weather() {
     <div className="container">
       <div className="WeatherApp">
         <div className="row">
-          <div className="col-8">
-            <SearchForm />
-          </div>
-          <div className="col-4">
-            <button>Use my current location</button>
-          </div>
+          <SearchForm />
         </div>
         <br />
       </div>

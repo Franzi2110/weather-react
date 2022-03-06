@@ -9,6 +9,12 @@ ReactDOM.render(
   <React.StrictMode>
     <Header />
     <Weather />
+    <footer>
+      See my projects on{" "}
+      <a href="https://github.com/Franzi2110" target="_blank">
+        Github
+      </a>
+    </footer>
   </React.StrictMode>,
   document.getElementById("root")
 );

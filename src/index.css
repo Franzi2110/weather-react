@@ -1,13 +1,19 @@
-.WeatherApp {
-  font-family: sans-serif;
-  text-align: center;
-}
 h1 {
   text-align: center;
   margin: 20px auto 0;
   font-family: "Libre Baskerville", serif;
   font-weight: bold;
 }
+
+footer {
+  font-size: 12px;
+  text-align: center;
+}
+.WeatherApp {
+  font-family: sans-serif;
+  text-align: center;
+}
+
 .WeatherApp ul {
   list-style: none;
 }
@@ -29,6 +35,9 @@ h1 {
 #wind {
   font-size: 16px;
 }
+#current-date {
+  font-size: 12px;
+}
 .WeatherApp {
   margin: 30px auto;
   padding: 20px;
@@ -36,10 +45,5 @@ h1 {
   border: 1px solid rgb(82, 4, 74);
   border-radius: 10px;
   max-width: 80%;
-  background: radial-gradient(
-    circle at 10% 20%,
-    rgb(253, 239, 132) 0%,
-    rgb(247, 198, 169) 54.2%,
-    rgb(21, 186, 196) 100.3%
-  );
+  background: linear-gradient(to top, #fddb92 0%, #d1fdff 100%);
 }
