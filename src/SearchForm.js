@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import CurrentDate from "./CurrentDate";
 import ReactAnimatedWeather from "react-animated-weather";
 import "bootstrap/dist/css/bootstrap.css";
 
@@ -10,6 +11,7 @@ export default function SearchForm() {
   let [wind, setWind] = useState();
   let [humidity, setHumidity] = useState();
   let [icon, setIcon] = useState();
+  let [citydate, setCitydate] = useState();
   let [loaded, setLoaded] = useState(false);
 
   function citySearch(event) {
@@ -35,6 +37,7 @@ export default function SearchForm() {
         alt="weather icon"
       />
     );
+    setCitydate(new Date(response.data.dt * 1000));
   }
   function showFahrenheit(event) {
     event.preventDefault();
@@ -47,8 +50,8 @@ export default function SearchForm() {
   if (loaded) {
     return (
       <div>
-        <div class="row">
-          <div class="col-8">
+        <div className="row">
+          <div className="col-8">
             <form onSubmit={sendData}>
               <input
                 type="search"
@@ -60,7 +63,7 @@ export default function SearchForm() {
               <input type="submit" value="Search" />
             </form>
           </div>
-          <div class="col-4">
+          <div className="col-4">
             <button>Use my current location</button>
           </div>
         </div>
@@ -69,12 +72,17 @@ export default function SearchForm() {
             <p id="cityName">{city}</p>
           </div>
         </div>
-        <div class="row justify-content-left">
-          <div class="col-4">
+        <div className="row justify-content-left">
+          <div className="col-4">
             <span id="actualDegree">️️{temperature}</span>&nbsp;
             <sup>
               <span>
-                <a href="/" onClick={showCelsius} id="celsius" class="active">
+                <a
+                  href="/"
+                  onClick={showCelsius}
+                  id="celsius"
+                  className="active"
+                >
                   °C
                 </a>{" "}
                 |
@@ -84,7 +92,9 @@ export default function SearchForm() {
               </span>
             </sup>
             <div>{icon}</div>
-            <p id="current-date">Last updated: Mon, 8:34 am</p>
+            <p id="current-date">
+              <CurrentDate date={citydate} />
+            </p>
           </div>
           <div className="col-5" id="moreInformation">
             <ul>
@@ -95,8 +105,8 @@ export default function SearchForm() {
           </div>
         </div>
         <br />
-        <div class="row justify-content-evenly">
-          <div class="col-2">
+        <div className="row justify-content-evenly">
+          <div className="col-2">
             <ReactAnimatedWeather
               icon="CLEAR_DAY"
               color="black"
@@ -105,7 +115,7 @@ export default function SearchForm() {
             />{" "}
             5°C
           </div>
-          <div class="col-2">
+          <div className="col-2">
             <ReactAnimatedWeather
               icon="SNOW"
               color="black"
@@ -114,7 +124,7 @@ export default function SearchForm() {
             />{" "}
             -1°C
           </div>
-          <div class="col-2">
+          <div className="col-2">
             <ReactAnimatedWeather
               icon="CLEAR_DAY"
               color="black"
@@ -123,7 +133,7 @@ export default function SearchForm() {
             />{" "}
             10°C
           </div>
-          <div class="col-2">
+          <div className="col-2">
             <ReactAnimatedWeather
               icon="CLOUDY"
               color="black"
@@ -132,7 +142,7 @@ export default function SearchForm() {
             />{" "}
             8°C
           </div>
-          <div class="col-2">
+          <div className="col-2">
             <ReactAnimatedWeather
               icon="RAIN"
               color="black"
@@ -147,8 +157,8 @@ export default function SearchForm() {
   } else {
     return (
       <div>
-        <div class="row">
-          <div class="col-8">
+        <div className="row">
+          <div className="col-8">
             <form onSubmit={sendData}>
               <input
                 type="search"
@@ -160,7 +170,7 @@ export default function SearchForm() {
               <input type="submit" value="Search" />
             </form>
           </div>
-          <div class="col-4">
+          <div className="col-4">
             <button>Use my current location</button>
           </div>
         </div>
@@ -169,12 +179,17 @@ export default function SearchForm() {
             <p id="cityName">Munich</p>
           </div>
         </div>
-        <div class="row justify-content-left">
-          <div class="col-4">
+        <div className="row justify-content-left">
+          <div className="col-4">
             <span id="actualDegree">️️10°C</span>&nbsp;
             <sup>
               <span>
-                <a href="/" onClick={showCelsius} id="celsius" class="active">
+                <a
+                  href="/"
+                  onClick={showCelsius}
+                  id="celsius"
+                  className="active"
+                >
                   °C
                 </a>{" "}
                 |
@@ -195,8 +210,8 @@ export default function SearchForm() {
           </div>
         </div>
         <br />
-        <div class="row justify-content-between">
-          <div class="col-2">
+        <div className="row justify-content-between">
+          <div className="col-2">
             <ReactAnimatedWeather
               icon="CLEAR_DAY"
               color="black"
@@ -205,7 +220,7 @@ export default function SearchForm() {
             />{" "}
             5°C
           </div>
-          <div class="col-2">
+          <div className="col-2">
             <ReactAnimatedWeather
               icon="SNOW"
               color="black"
@@ -214,7 +229,7 @@ export default function SearchForm() {
             />{" "}
             -1°C
           </div>
-          <div class="col-2">
+          <div className="col-2">
             <ReactAnimatedWeather
               icon="CLEAR_DAY"
               color="black"
@@ -223,7 +238,7 @@ export default function SearchForm() {
             />{" "}
             10°C
           </div>
-          <div class="col-2">
+          <div className="col-2">
             <ReactAnimatedWeather
               icon="CLOUDY"
               color="black"
@@ -232,7 +247,7 @@ export default function SearchForm() {
             />{" "}
             8°C
           </div>
-          <div class="col-2">
+          <div className="col-2">
             <ReactAnimatedWeather
               icon="RAIN"
               color="black"
