@@ -26,7 +26,6 @@ export default function SearchForm() {
 
   function showDetails(response) {
     console.log(response.data);
-    setLoaded(true);
     setTemperature(Math.round(response.data.main.temp));
     setDescription(response.data.weather[0].description);
     setWind(response.data.wind.speed);
@@ -38,6 +37,7 @@ export default function SearchForm() {
       />
     );
     setCitydate(new Date(response.data.dt * 1000));
+    setLoaded(true);
   }
   function showFahrenheit(event) {
     event.preventDefault();
@@ -181,7 +181,7 @@ export default function SearchForm() {
         </div>
         <div className="row justify-content-left">
           <div className="col-4">
-            <span id="actualDegree">️️10°C</span>&nbsp;
+            <span id="actualDegree">️️10</span>&nbsp;
             <sup>
               <span>
                 <a
