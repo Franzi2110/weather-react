@@ -9,6 +9,10 @@ footer {
   font-size: 12px;
   text-align: center;
 }
+
+form {
+  margin-bottom: 30px;
+}
 .WeatherApp {
   font-family: sans-serif;
   text-align: center;
@@ -17,7 +21,7 @@ footer {
 .WeatherApp ul {
   list-style: none;
 }
-#cityName {
+.cityName {
   font-size: 24px;
   font-weight: bold;
 }

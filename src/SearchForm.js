@@ -3,9 +3,10 @@ import axios from "axios";
 import CurrentDate from "./CurrentDate";
 import ReactAnimatedWeather from "react-animated-weather";
 import "bootstrap/dist/css/bootstrap.css";
+import WeatherTemperature from "./WeatherTemperature";
 
 export default function SearchForm() {
-  let [city, setCity] = useState("");
+  let [city, setCity] = useState("Munich");
   let [temperature, setTemperature] = useState();
   let [description, setDescription] = useState();
   let [wind, setWind] = useState();
@@ -39,14 +40,7 @@ export default function SearchForm() {
     setCitydate(new Date(response.data.dt * 1000));
     setLoaded(true);
   }
-  function showFahrenheit(event) {
-    event.preventDefault();
-    return Math.round({ temperature } * 9) / 5 + 32;
-  }
-  function showCelsius(event) {
-    event.preventDefault();
-    return { temperature };
-  }
+
   if (loaded) {
     return (
       <div>
@@ -63,38 +57,18 @@ export default function SearchForm() {
               <input type="submit" value="Search" />
             </form>
           </div>
-          <div className="col-4">
-            <button>Use my current location</button>
-          </div>
         </div>
         <div className="row">
-          <div className="col-4">
-            <p id="cityName">{city}</p>
-          </div>
+          <div className="col-4 cityName">{city}</div>
         </div>
         <div className="row justify-content-left">
           <div className="col-4">
-            <span id="actualDegree">️️{temperature}</span>&nbsp;
-            <sup>
-              <span>
-                <a
-                  href="/"
-                  onClick={showCelsius}
-                  id="celsius"
-                  className="active"
-                >
-                  °C
-                </a>{" "}
-                |
-                <a href="/" onClick={showFahrenheit} id="fahrenheit">
-                  °F
-                </a>
-              </span>
-            </sup>
+            <WeatherTemperature celsius={temperature} />
+
             <div>{icon}</div>
-            <p id="current-date">
+            <div id="current-date">
               <CurrentDate date={citydate} />
-            </p>
+            </div>
           </div>
           <div className="col-5" id="moreInformation">
             <ul>
@@ -155,11 +129,18 @@ export default function SearchForm() {
       </div>
     );
   } else {
+    let city = "Munich";
+    let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=b400ae3b711a616262d18b0ca2cbe78f&units=metric`;
+    axios.get(url).then(showDetails);
     return (
       <div>
+               {" "}
         <div className="row">
+                   {" "}
           <div className="col-8">
+                       {" "}
             <form onSubmit={sendData}>
+                           {" "}
               <input
                 type="search"
                 placeholder="Enter your current city"
@@ -167,96 +148,96 @@ export default function SearchForm() {
                 autoComplete="off"
                 onChange={citySearch}
               />
-              <input type="submit" value="Search" />
+                            <input type="submit" value="Search" />           {" "}
             </form>
+                     {" "}
           </div>
-          <div className="col-4">
-            <button>Use my current location</button>
-          </div>
+                 {" "}
         </div>
+               {" "}
         <div className="row">
-          <div className="col-4">
-            <p id="cityName">Munich</p>
-          </div>
+                    <div className="col-4 cityName">{city}</div>       {" "}
         </div>
+               {" "}
         <div className="row justify-content-left">
+                   {" "}
           <div className="col-4">
-            <span id="actualDegree">️️10</span>&nbsp;
-            <sup>
-              <span>
-                <a
-                  href="/"
-                  onClick={showCelsius}
-                  id="celsius"
-                  className="active"
-                >
-                  °C
-                </a>{" "}
-                |
-                <a href="/" onClick={showFahrenheit} id="fahrenheit">
-                  °F
-                </a>
-              </span>
-            </sup>
-            <div className="icon">☀️</div>
-            <p id="current-date">Last updated: Mon, 8:34 am</p>
+                        <WeatherTemperature celsius={temperature} />           {" "}
+            <div className="icon">☀️</div>           {" "}
+            <p id="current-date">Last updated: Mon, 8:34 am</p>         {" "}
           </div>
+                   {" "}
           <div className="col-5" id="moreInformation">
+                       {" "}
             <ul>
-              <li id="description">Sunny</li>
-              <li id="current-humidity">Humidity: 60%</li>
-              <li id="wind">Wind speed: 12 km/h</li>
+                            <li id="description">Sunny</li>             {" "}
+              <li id="current-humidity">Humidity: 60%</li>             {" "}
+              <li id="wind">Wind speed: 12 km/h</li>           {" "}
             </ul>
+                     {" "}
           </div>
+                 {" "}
         </div>
-        <br />
+                <br />       {" "}
         <div className="row justify-content-between">
+                   {" "}
           <div className="col-2">
+                       {" "}
             <ReactAnimatedWeather
               icon="CLEAR_DAY"
               color="black"
               size={15}
               animate="true"
             />{" "}
-            5°C
+                        5°C          {" "}
           </div>
+                   {" "}
           <div className="col-2">
+                       {" "}
             <ReactAnimatedWeather
               icon="SNOW"
               color="black"
               size={15}
               animate="true"
             />{" "}
-            -1°C
+                        -1°C          {" "}
           </div>
+                   {" "}
           <div className="col-2">
+                       {" "}
             <ReactAnimatedWeather
               icon="CLEAR_DAY"
               color="black"
               size={15}
               animate="true"
             />{" "}
-            10°C
+                        10°C          {" "}
           </div>
+                   {" "}
           <div className="col-2">
+                       {" "}
             <ReactAnimatedWeather
               icon="CLOUDY"
               color="black"
               size={15}
               animate="true"
             />{" "}
-            8°C
+                        8°C          {" "}
           </div>
+                   {" "}
           <div className="col-2">
+                       {" "}
             <ReactAnimatedWeather
               icon="RAIN"
               color="black"
               size={15}
               animate="true"
             />{" "}
-            4°C
+                        4°C          {" "}
           </div>
+                 {" "}
         </div>
+             {" "}
       </div>
     );
   }
