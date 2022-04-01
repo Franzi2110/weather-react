@@ -60,7 +60,7 @@ export default function SearchForm() {
 
             <div>
               <img
-                src={`http://openweathermap.org/img/wn/${weatherData.icon}.png`}
+                src={`https://openweathermap.org/img/wn/${weatherData.icon}.png`}
                 alt="Weather Icon"
               />
             </div>
