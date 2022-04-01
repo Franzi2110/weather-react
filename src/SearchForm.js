@@ -7,14 +7,7 @@ import WeatherForecast from "./WeatherForecast";
 
 export default function SearchForm() {
   let [city, setCity] = useState("Munich");
-  let [coordinates, setCoordinates] = useState();
-  let [temperature, setTemperature] = useState();
-  let [description, setDescription] = useState();
-  let [wind, setWind] = useState();
-  let [humidity, setHumidity] = useState();
-  let [icon, setIcon] = useState();
-  let [citydate, setCitydate] = useState();
-  let [loaded, setLoaded] = useState(false);
+  let [weatherData, setWeatherData] = useState({ ready: false });
 
   function citySearch(event) {
     setCity(event.target.value);
@@ -28,22 +21,20 @@ export default function SearchForm() {
 
   function showDetails(response) {
     console.log(response.data);
-    setCoordinates(response.data.coord);
-    setTemperature(Math.round(response.data.main.temp));
-    setDescription(response.data.weather[0].description);
-    setWind(response.data.wind.speed);
-    setHumidity(response.data.main.humidity);
-    setIcon(
-      <img
-        src={`http://openweathermap.org/img/wn/${response.data.weather[0].icon}.png`}
-        alt="weather icon"
-      />
-    );
-    setCitydate(new Date(response.data.dt * 1000));
-    setLoaded(true);
+    setWeatherData({
+      ready: true,
+      city: response.data.name,
+      temperature: Math.round(response.data.main.temp),
+      description: response.data.weather[0].description,
+      wind: response.data.wind.speed,
+      humidity: response.data.main.humidity,
+      icon: response.data.weather[0].icon,
+      date: new Date(response.data.dt * 1000),
+      coordinates: response.data.coord,
+    });
   }
 
-  if (loaded) {
+  if (weatherData.ready) {
     return (
       <div>
         <div className="row">
@@ -61,27 +52,32 @@ export default function SearchForm() {
           </div>
         </div>
         <div className="row">
-          <div className="col-4 cityName">{city}</div>
+          <div className="col-4 cityName">{weatherData.city}</div>
         </div>
         <div className="row justify-content-left">
           <div className="col-4">
-            <WeatherTemperature celsius={temperature} />
+            <WeatherTemperature celsius={weatherData.temperature} />
 
-            <div>{icon}</div>
+            <div>
+              <img
+                src={`http://openweathermap.org/img/wn/${weatherData.icon}.png`}
+                alt="Weather Icon"
+              />
+            </div>
             <div id="current-date">
-              <CurrentDate date={citydate} />
+              <CurrentDate date={weatherData.date} />
             </div>
           </div>
           <div className="col-5" id="moreInformation">
             <ul>
-              <li id="description">{description}</li>
-              <li id="current-humidity">Humidity: {humidity}%</li>
-              <li id="wind">Wind speed: {wind} km/h</li>
+              <li id="description">{weatherData.description}</li>
+              <li id="current-humidity">Humidity: {weatherData.humidity}%</li>
+              <li id="wind">Wind speed: {weatherData.wind} km/h</li>
             </ul>
           </div>
         </div>
         <br />
-        <WeatherForecast coordinates={coordinates} />
+        <WeatherForecast coordinates={weatherData.coordinates} />
       </div>
     );
   } else {
